@@ -1,6 +1,6 @@
 package com.rafaeldev.clinicascrm.domain.valueObjects;
 
-import com.rafaeldev.clinicascrm.domain.models.Pessoa;
+import com.rafaeldev.clinicascrm.domain.models.pessoa.Pessoa;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,7 +23,4 @@ public class Endereco {
     private String cidade;
     private String estado;
     private String cep;
-    @OneToOne
-    @MapsId
-    private Pessoa pessoa;
 }

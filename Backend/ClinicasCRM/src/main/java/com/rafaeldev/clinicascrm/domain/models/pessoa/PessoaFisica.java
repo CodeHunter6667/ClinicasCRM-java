@@ -1,16 +1,19 @@
-package com.rafaeldev.clinicascrm.domain.models;
+package com.rafaeldev.clinicascrm.domain.models.pessoa;
 
+import com.rafaeldev.clinicascrm.domain.models.avaliacao.AvaliacaoCorporal;
+import com.rafaeldev.clinicascrm.domain.models.avaliacao.AvaliacaoFacial;
 import com.rafaeldev.clinicascrm.domain.enums.EGenero;
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-@Entity(name = "tb_cliente")
+@Entity(name = "tb_pessoa_fisica")
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,9 +23,10 @@ public class PessoaFisica extends Pessoa{
     private LocalDateTime dataNascimento;
     private EGenero genero;
     private Integer idade = calcularIdade();
-    @ManyToOne
-    @JoinColumn(name = "pessoa_id")
-    private Pessoa pessoa;
+    @OneToMany(mappedBy = "cliente")
+    private List<AvaliacaoCorporal> avaliacoesCorporais = new ArrayList<>();
+    @OneToMany(mappedBy = "cliente")
+    private List<AvaliacaoFacial> avaliacoesFaciais = new ArrayList<>();
 
     private Integer calcularIdade() {
         if (dataNascimento != null) {

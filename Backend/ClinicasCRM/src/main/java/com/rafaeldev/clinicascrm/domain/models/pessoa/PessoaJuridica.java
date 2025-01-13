@@ -1,8 +1,6 @@
-package com.rafaeldev.clinicascrm.domain.models;
+package com.rafaeldev.clinicascrm.domain.models.pessoa;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -19,7 +17,4 @@ public class PessoaJuridica extends Pessoa{
     private String inscricaoEstadual;
     private String inscricaoMunicipal;
     private boolean ehSimplesNacional;
-    @ManyToOne
-    @JoinColumn(name = "pessoa_id")
-    private Pessoa pessoa;
 }

@@ -1,30 +1,35 @@
 package com.rafaeldev.clinicascrm.domain.models.paciente;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.rafaeldev.clinicascrm.domain.models.consulta.Anamnese;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-@Entity(name = "tb_historico_paciente")
+@Entity
+@Table(name = "tb_historico_paciente")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class HistoricoPaciente {
+public class HistoricoPaciente implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private boolean estaSalva;
     private LocalDateTime dataCriacao;
     private LocalDateTime dataAlteracao;
+    @Column(length = 250)
     private String tratamentosAnteriores;
+    @Column(length = 150)
     private String alergias;
+    @Column(length = 150)
     private String tratamentosOncologicos;
     private boolean hipertensao;
     private boolean diabetes;
@@ -34,4 +39,6 @@ public class HistoricoPaciente {
     private boolean protesesdentarias;
     private boolean epilepsia;
     private boolean fazTratamentoMedico;
+    @OneToMany(mappedBy = "historicoPaciente")
+    private List<Anamnese> anamneses = new ArrayList<>();
 }

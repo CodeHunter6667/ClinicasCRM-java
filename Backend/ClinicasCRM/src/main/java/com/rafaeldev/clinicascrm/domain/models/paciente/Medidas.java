@@ -1,22 +1,24 @@
 package com.rafaeldev.clinicascrm.domain.models.paciente;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import com.rafaeldev.clinicascrm.domain.models.avaliacao.AvaliacaoCorporal;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-@Entity(name = "tb_medidas")
+@Entity
+@Table(name = "tb_medidas")
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Medidas {
+public class Medidas implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -35,4 +37,6 @@ public class Medidas {
     private Double panturrilhaDireita;
     private Double panturrilhaEsquerda;
     private LocalDateTime dataMedicao;
+    @OneToMany(mappedBy = "medidas")
+    private List<AvaliacaoCorporal> avaliacaoCorporal = new ArrayList<>();
 }

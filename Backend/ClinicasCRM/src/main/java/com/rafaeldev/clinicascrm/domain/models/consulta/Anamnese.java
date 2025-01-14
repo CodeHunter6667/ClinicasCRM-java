@@ -10,28 +10,30 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
-@Entity(name = "tb_anamnese")
+@Entity
+@Table(name = "tb_anamnese")
 @Inheritance(strategy = InheritanceType.JOINED)
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Anamnese {
+public class Anamnese implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private boolean estaSalva;
     private LocalDateTime dataCriacao;
     private LocalDateTime dataAlteracao;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "cliente_id")
     private PessoaFisica cliente;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "historico_paciente_id")
     private HistoricoPaciente historicoPaciente;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "habitos_id")
     private Habitos habitos;
 }

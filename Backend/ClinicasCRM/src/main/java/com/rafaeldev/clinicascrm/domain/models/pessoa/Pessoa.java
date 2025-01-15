@@ -3,17 +3,9 @@ package com.rafaeldev.clinicascrm.domain.models.pessoa;
 import com.rafaeldev.clinicascrm.domain.enums.ETipoCadastro;
 import com.rafaeldev.clinicascrm.domain.valueObjects.Endereco;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.io.Serializable;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Entity
 @Table(name = "tb_pessoa")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -31,4 +23,59 @@ public abstract class Pessoa implements Serializable {
     private Endereco endereco;
     @Enumerated(EnumType.STRING)
     private ETipoCadastro cadastro;
+
+    public Pessoa() {
+    }
+
+    public Pessoa(Long id,
+                  String telefone,
+                  String email,
+                  Endereco endereco,
+                  ETipoCadastro cadastro) {
+        this.id = id;
+        this.telefone = telefone;
+        this.email = email;
+        this.endereco = endereco;
+        this.cadastro = cadastro;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public ETipoCadastro getCadastro() {
+        return cadastro;
+    }
+
+    public void setCadastro(ETipoCadastro cadastro) {
+        this.cadastro = cadastro;
+    }
 }

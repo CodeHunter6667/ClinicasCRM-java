@@ -1,15 +1,13 @@
 package com.rafaeldev.clinicascrm.domain.models.pessoa;
 
+import com.rafaeldev.clinicascrm.domain.enums.ETipoCadastro;
 import com.rafaeldev.clinicascrm.domain.models.agendamento.Agendamento;
 import com.rafaeldev.clinicascrm.domain.models.avaliacao.AvaliacaoCorporal;
 import com.rafaeldev.clinicascrm.domain.models.avaliacao.AvaliacaoFacial;
 import com.rafaeldev.clinicascrm.domain.enums.EGenero;
 import com.rafaeldev.clinicascrm.domain.models.consulta.Anamnese;
+import com.rafaeldev.clinicascrm.domain.valueObjects.Endereco;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -21,10 +19,6 @@ import java.util.List;
 @Table(name = "tb_pessoa_fisica")
 @PrimaryKeyJoinColumn(name = "id")
 @DiscriminatorValue("FISICA")
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 public class PessoaFisica extends Pessoa implements Serializable {
 
     @Column(name = "nome_completo", length = 150, nullable = false)
@@ -59,5 +53,106 @@ public class PessoaFisica extends Pessoa implements Serializable {
         } else {
             idade = null;
         }
+    }
+
+    public PessoaFisica() {
+    }
+
+    public PessoaFisica(Long id,
+                        String telefone,
+                        String email,
+                        Endereco endereco,
+                        ETipoCadastro cadastro,
+                        String nomeCompleto,
+                        String cpf,
+                        LocalDate dataNascimento,
+                        EGenero genero,
+                        Integer idade,
+                        List<AvaliacaoCorporal> avaliacoesCorporais,
+                        List<AvaliacaoFacial> avaliacoesFaciais,
+                        List<Anamnese> anamneses,
+                        List<Agendamento> agendamentos) {
+        super(id, telefone, email, endereco, cadastro);
+        this.nomeCompleto = nomeCompleto;
+        this.cpf = cpf;
+        this.dataNascimento = dataNascimento;
+        this.genero = genero;
+        this.idade = idade;
+        this.avaliacoesCorporais = avaliacoesCorporais;
+        this.avaliacoesFaciais = avaliacoesFaciais;
+        this.anamneses = anamneses;
+        this.agendamentos = agendamentos;
+    }
+
+    public String getNomeCompleto() {
+        return nomeCompleto;
+    }
+
+    public void setNomeCompleto(String nomeCompleto) {
+        this.nomeCompleto = nomeCompleto;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public EGenero getGenero() {
+        return genero;
+    }
+
+    public void setGenero(EGenero genero) {
+        this.genero = genero;
+    }
+
+    public Integer getIdade() {
+        return idade;
+    }
+
+    public void setIdade(Integer idade) {
+        this.idade = idade;
+    }
+
+    public List<AvaliacaoCorporal> getAvaliacoesCorporais() {
+        return avaliacoesCorporais;
+    }
+
+    public void setAvaliacoesCorporais(List<AvaliacaoCorporal> avaliacoesCorporais) {
+        this.avaliacoesCorporais = avaliacoesCorporais;
+    }
+
+    public List<AvaliacaoFacial> getAvaliacoesFaciais() {
+        return avaliacoesFaciais;
+    }
+
+    public void setAvaliacoesFaciais(List<AvaliacaoFacial> avaliacoesFaciais) {
+        this.avaliacoesFaciais = avaliacoesFaciais;
+    }
+
+    public List<Anamnese> getAnamneses() {
+        return anamneses;
+    }
+
+    public void setAnamneses(List<Anamnese> anamneses) {
+        this.anamneses = anamneses;
+    }
+
+    public List<Agendamento> getAgendamentos() {
+        return agendamentos;
+    }
+
+    public void setAgendamentos(List<Agendamento> agendamentos) {
+        this.agendamentos = agendamentos;
     }
 }

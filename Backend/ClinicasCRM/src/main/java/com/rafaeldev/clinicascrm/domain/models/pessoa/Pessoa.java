@@ -2,6 +2,7 @@ package com.rafaeldev.clinicascrm.domain.models.pessoa;
 
 import com.rafaeldev.clinicascrm.domain.enums.ETipoCadastro;
 import com.rafaeldev.clinicascrm.domain.valueObjects.Endereco;
+import com.rafaeldev.clinicascrm.dto.valueObject.EnderecoDTO;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -69,6 +70,10 @@ public abstract class Pessoa implements Serializable {
 
     public void setEndereco(Endereco endereco) {
         this.endereco = endereco;
+    }
+
+    public void setEndereco(EnderecoDTO dto){
+        this.endereco = new Endereco(dto);
     }
 
     public ETipoCadastro getCadastro() {

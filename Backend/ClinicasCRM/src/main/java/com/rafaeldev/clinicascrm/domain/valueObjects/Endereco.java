@@ -1,5 +1,6 @@
 package com.rafaeldev.clinicascrm.domain.valueObjects;
 
+import com.rafaeldev.clinicascrm.dto.valueObject.EnderecoDTO;
 import jakarta.persistence.*;
 
 import java.io.Serializable;
@@ -44,6 +45,17 @@ public class Endereco implements Serializable {
         this.cidade = cidade;
         this.estado = estado;
         this.cep = cep;
+    }
+
+    public Endereco(EnderecoDTO dto){
+        this.id = dto.id();
+        this.logradouro = dto.logradouro();
+        this.numero = dto.numero();
+        this.complemento = dto.complemento();
+        this.bairro = dto.bairro();
+        this.cidade = dto.cidade();
+        this.estado = dto.estado();
+        this.cep = dto.cep();
     }
 
     public Long getId() {
